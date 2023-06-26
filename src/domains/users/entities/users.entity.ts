@@ -1,6 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  BeforeUpdate,
+} from 'typeorm';
 import { BaseEntity } from '../../../bases/base.entity';
+import { Bookmarks } from '../../bookmarks/entities/bookmarks.entity';
+import { Likes } from '../../likes/entities/likes.entity';
+import { Reply } from '../../reply/entities/reply.entity';
+import { Feeds } from '../../feeds/entities/feeds.entity';
+import * as bcrypt from 'bcrypt';
 
 @Entity('users')
 export class Users extends BaseEntity {
@@ -40,4 +51,32 @@ export class Users extends BaseEntity {
     select: false,
   })
   jwtToken!: string | null;
+
+  @OneToMany(() => Bookmarks, (bookmark) => bookmark.userId)
+  @JoinColumn({ name: 'bookmark_id', referencedColumnName: 'bookmarkId' })
+  bookmarkList: Bookmarks[];
+
+  @OneToMany(() => Likes, (like) => like.userId)
+  @JoinColumn({ name: 'like_id', referencedColumnName: 'likeId' })
+  likeId: number;
+
+  @OneToMany(() => Reply, (reply) => reply.userId)
+  @JoinColumn({ name: 'reply_id', referencedColumnName: 'replyId' })
+  replyList: Reply[];
+
+  @OneToMany(() => Feeds, (feed) => feed.userId)
+  feedList: Feeds[];
+
+  /**
+   * 비밀번호 암호화
+   * @param password
+   */
+  async hashPassword(password: string): Promise<void> {
+    this.password = await bcrypt.hash(password, 12);
+  }
+
+  @BeforeUpdate()
+  async updateDate(): Promise<void> {
+    this.updatedAt = await new Date();
+  }
 }

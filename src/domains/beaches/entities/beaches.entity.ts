@@ -1,5 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { BaseEntity } from "../../../bases/base.entity";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { BaseEntity } from '../../../bases/base.entity';
+import { Feeds } from '../../feeds/entities/feeds.entity';
+import { Bookmarks } from '../../bookmarks/entities/bookmarks.entity';
+import { Likes } from '../../likes/entities/likes.entity';
 
 @Entity('beach')
 export class Beaches extends BaseEntity {
@@ -43,4 +52,16 @@ export class Beaches extends BaseEntity {
     nullable: false,
   })
   longitude: string;
+
+  @OneToMany(() => Feeds, (feed) => feed.beachId)
+  @JoinColumn({ name: 'feed_id', referencedColumnName: 'feedId' })
+  feedList: Feeds[];
+
+  @OneToMany(() => Bookmarks, (bookmark) => bookmark.beachId)
+  @JoinColumn({ name: 'bookmark_id', referencedColumnName: 'bookmarkId' })
+  bookmarkList: Bookmarks[];
+
+  @OneToMany(() => Likes, (like) => like.beachId)
+  @JoinColumn({ name: 'like_id', referencedColumnName: 'likeId' })
+  likeId: number;
 }
