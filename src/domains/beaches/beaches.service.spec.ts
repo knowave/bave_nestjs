@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BeachesService } from './beaches.service';
 import { BeachesRepository } from './beaches.repository';
+import { Beaches } from './entities/beaches.entity';
 
 const mockRepository = {
   getAllByBeaches: jest.fn(),
@@ -26,7 +27,64 @@ describe('BeachesService', () => {
     repository = module.get<BeachesRepository>(BeachesRepository);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  describe('BeachesService', () => {
+    it('should return a list of Beaches', async () => {
+      const paginationQuery = {
+        page: 1,
+        limit: 10,
+      };
+
+      const paginateBeach = {
+        items: [
+          { beachId: 1, name: 'test1' },
+          { beachId: 2, name: 'test2' },
+          { beachId: 3, name: 'test3' },
+          { beachId: 4, name: 'test4' },
+          { beachId: 5, name: 'test5' },
+        ],
+        meta: {
+          totalItems: 5,
+          itemCount: 5,
+          itemsPerPage: 10,
+          totalPages: 1,
+          currentPage: 1,
+        },
+      };
+
+      jest.spyOn(service, 'getAllByBeaches').mockRepository(paginateBeach);
+
+      const result = await service.getAllByBeaches(paginationQuery);
+    });
+  });
+
+  describe('getBeachById', () => {
+    it('should find a beach by Id', async () => {
+      const beachId = 1;
+      const beach: Beaches = {
+        beachId: beachId,
+        sidoName: '강릉시',
+        gugunName: '',
+        beachName: '경포 해수욕장',
+        latitude: '3.3',
+        longitude: '2.2',
+      };
+
+      jest.spyOn(repository, 'getBeachById').mockResolvedValue(beach);
+
+      const result = await service.findOneById(beachId);
+
+      expect(result).toEqual(beach);
+      expect(repository.getBeachById).toHaveBeenCalledWith(beachId);
+    });
+
+    it('should throw NotFoundException if cat is not found', async () => {
+      const catId = 1;
+
+      jest.spyOn(repository, 'findOneById').mockResolvedValue(undefined);
+
+      await expect(service.findOneById(catId)).rejects.toThrowError(
+        NotFoundException,
+      );
+    });
   });
 });
