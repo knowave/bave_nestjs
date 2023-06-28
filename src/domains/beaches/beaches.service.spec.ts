@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BeachesService } from './beaches.service';
 import { BeachesRepository } from './beaches.repository';
 import { Beaches } from './entities/beaches.entity';
+import { NotFoundException } from '@nestjs/common';
 
 const mockRepository = {
   getAllByBeaches: jest.fn(),
@@ -67,22 +68,25 @@ describe('BeachesService', () => {
         beachName: '경포 해수욕장',
         latitude: '3.3',
         longitude: '2.2',
+        feedList: [],
+        bookmarkList: [],
+        likeId: 0,
       };
 
       jest.spyOn(repository, 'getBeachById').mockResolvedValue(beach);
 
-      const result = await service.findOneById(beachId);
+      const result = await service.getBeachById(beachId);
 
       expect(result).toEqual(beach);
       expect(repository.getBeachById).toHaveBeenCalledWith(beachId);
     });
 
     it('should throw NotFoundException if cat is not found', async () => {
-      const catId = 1;
+      const beacheId = 1;
 
-      jest.spyOn(repository, 'findOneById').mockResolvedValue(undefined);
+      jest.spyOn(repository, 'getBeachById').mockResolvedValue(undefined);
 
-      await expect(service.findOneById(catId)).rejects.toThrowError(
+      await expect(service.getBeachById(beacheId)).rejects.toThrowError(
         NotFoundException,
       );
     });
