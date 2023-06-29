@@ -52,7 +52,7 @@ describe('BeachesService', () => {
         },
       };
 
-      jest.spyOn(service, 'getAllByBeaches').mockRepository(paginateBeach);
+      jest.spyOn(service, 'getAllByBeaches').mockResolvedValue(paginateBeach);
 
       const result = await service.getAllByBeaches(paginationQuery);
     });
