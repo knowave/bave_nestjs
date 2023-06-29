@@ -3,7 +3,7 @@ import { Test } from 'supertest';
 import * as request from 'supertest';
 
 export class RequestHelper {
-  constructor(private app: INestApplication, private token: string) {}
+  constructor(private app: INestApplication, private token?: string) {}
 
   /**
    * Get Method
