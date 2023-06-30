@@ -13,7 +13,7 @@ import { Reply } from '../../reply/entities/reply.entity';
 import { Bookmarks } from '../../bookmarks/entities/bookmarks.entity';
 import { Likes } from '../../likes/entities/likes.entity';
 
-@Entity()
+@Entity('feed')
 export class Feeds extends BaseEntity {
   @PrimaryGeneratedColumn({
     name: 'feed_id',

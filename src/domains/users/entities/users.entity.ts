@@ -13,7 +13,7 @@ import { Reply } from '../../reply/entities/reply.entity';
 import { Feeds } from '../../feeds/entities/feeds.entity';
 import * as bcrypt from 'bcrypt';
 
-@Entity('users')
+@Entity('user')
 export class Users extends BaseEntity {
   @PrimaryGeneratedColumn({
     name: 'user_id',

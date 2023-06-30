@@ -4,7 +4,7 @@ import { Users } from '../../users/entities/users.entity';
 import { Feeds } from '../../feeds/entities/feeds.entity';
 import { Likes } from '../../likes/entities/likes.entity';
 
-@Entity()
+@Entity('reply')
 export class Reply extends BaseEntity {
   @PrimaryGeneratedColumn({
     name: 'reply_id',
