@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { DatabasesModule } from './databases/databases.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
+import { BeachesModule } from './domains/beaches/beaches.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import * as Joi from '@hapi/joi';
       }),
     }),
     DatabasesModule,
+    BeachesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
