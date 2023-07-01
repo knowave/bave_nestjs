@@ -17,16 +17,7 @@ export class BeachesService {
   async getAllByBeaches(
     options: MyPaginationQuery,
   ): Promise<Pagination<Beaches>> {
-    const query = this.beachesRepository.createQueryBuilder('beach');
-    query.getRawMany();
-
-    const pagination = await paginate<Beaches>(query, options);
-
-    if (pagination.items.length === 0) {
-      throw new NotFoundException(BEACH_EXCEPTION.BEACH_NOT_FOUND);
-    }
-
-    return pagination;
+    return paginate(await this.beachesRepository, options);
   }
 
   async getBeachById(beachId: number): Promise<Beaches> {
