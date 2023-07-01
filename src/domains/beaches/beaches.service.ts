@@ -14,7 +14,7 @@ export class BeachesService {
     private readonly beachesRepository: BeachesRepository,
   ) {}
 
-  async getAllBeaches(
+  async getAllByBeaches(
     options: MyPaginationQuery,
   ): Promise<Pagination<Beaches>> {
     const query = this.beachesRepository.createQueryBuilder('beach');
