@@ -55,13 +55,13 @@ export class Beaches extends BaseEntity {
 
   @OneToMany(() => Feeds, (feed) => feed.beachId)
   @JoinColumn({ name: 'feed_id', referencedColumnName: 'feedId' })
-  feedList: Feeds[];
+  feedList?: Feeds[];
 
   @OneToMany(() => Bookmarks, (bookmark) => bookmark.beachId)
   @JoinColumn({ name: 'bookmark_id', referencedColumnName: 'bookmarkId' })
-  bookmarkList: Bookmarks[];
+  bookmarkList?: Bookmarks[];
 
   @OneToMany(() => Likes, (like) => like.beachId)
   @JoinColumn({ name: 'like_id', referencedColumnName: 'likeId' })
-  likeId: number;
+  likeId?: number;
 }
