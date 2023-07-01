@@ -90,6 +90,9 @@ describe('BeachesService', () => {
       jest.spyOn(service, 'getAllByBeaches').mockResolvedValue(paginateBeach);
 
       const result = await service.getAllByBeaches(paginationQuery);
+
+      expect(result).toEqual(paginateBeach);
+      expect(service.getAllByBeaches).toHaveBeenCalledWith(paginationQuery);
     });
   });
 
