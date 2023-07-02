@@ -5,6 +5,7 @@ import { DatabasesModule } from './databases/databases.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
 import { BeachesModule } from './domains/beaches/beaches.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { BeachesModule } from './domains/beaches/beaches.module';
     }),
     DatabasesModule,
     BeachesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
