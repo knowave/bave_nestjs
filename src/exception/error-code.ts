@@ -6,9 +6,22 @@ export const BEACH_EXCEPTION = {
 };
 
 export const USER_EXCEPTION = {
+  EXIST_USER: {
+    code: 'EXIST_USER',
+    message: '이미 존재하는 유저입니다.',
+  },
   USER_NOT_FOUND: {
     code: 'USER_NOT_FOUND',
     message: '존재하는 유저가 없습니다.',
+  },
+  EXIST_USERNAME: {
+    code: 'EXIST_USERNAME',
+    message: '이미 존재하는 닉네임입니다.',
+  },
+
+  NOT_MATCH_PASSWORD: {
+    code: 'NOT_MATCH_PASSWORD',
+    message: '비밀번호가 일치하지 않습니다.',
   },
 };
 
