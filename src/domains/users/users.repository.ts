@@ -74,39 +74,4 @@ export class UsersRepository extends Repository<Users> {
 
     return user;
   }
-
-  /**
-   * 발급받은 refreshToken 저장
-   * @param refreshToken
-   * @param userId
-   * @returns
-   */
-  async setCurrentRefreshToken(refreshToken: string, userId: number) {
-    return await this.update(userId, { jwtToken: refreshToken });
-  }
-
-  /**
-   * refreshToken 유효성 확인.
-   * @param refreshToken 
-   * @param userId 
-   * @returns 
-   */
-  async getUserIfRefreshTokenMatches(refreshToken: string, userId: number) {
-    const user = await this.getUserById(userId);
-
-    if (refreshToken == user.jwtToken) {
-      return user;
-    } else {
-      throw new BadRequestException('유효하지 않는 토큰입니다.');
-    }
-  }
-
-  /**
-   * 발급받은 refreshToken 삭제
-   * @param userId
-   * @returns
-   */
-  async removeRefreshToken(userId: number) {
-    return await this.update(userId, { jwtToken: null });
-  }
 }
