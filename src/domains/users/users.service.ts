@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Users } from './entities/users.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersRepository } from './users.repository';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -87,5 +88,30 @@ export class UsersService {
     } else {
       await this.usersRepository.softDelete(userId);
     }
+  }
+
+  /**
+   * 유저 정보 수정
+   * @param userId 
+   * @param username 
+   * @param plainPassword 
+   * @returns 
+   */
+  async updateUser(
+    userId: number,
+    username?: string,
+    plainPassword?: string,
+  ): Promise<Users> {
+    const user = await this.getUserById(userId);
+
+    if (username) {
+      user.username = username;
+    }
+
+    if (plainPassword) {
+      user.password = await bcrypt.hash(plainPassword, 12);
+    }
+
+    return await this.usersRepository.save(user);
   }
 }
