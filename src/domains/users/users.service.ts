@@ -9,8 +9,8 @@ export class UsersService {
 
   /**
    * 특정 유저 조회
-   * @param userId 
-   * @returns 
+   * @param userId
+   * @returns
    */
   async getUserById(userId: number): Promise<Users> {
     return await this.usersRepository.getUserById(userId);
@@ -18,8 +18,8 @@ export class UsersService {
 
   /**
    * 유저 생성
-   * @param createUserDto 
-   * @returns 
+   * @param createUserDto
+   * @returns
    */
   async createUser(createUserDto: CreateUserDto): Promise<Users> {
     return await this.usersRepository.createUser(createUserDto);
@@ -27,8 +27,8 @@ export class UsersService {
 
   /**
    * SignIn용 특정 유저 조회
-   * @param email 
-   * @returns 
+   * @param email
+   * @returns
    */
   async getUserByEmail(email: string): Promise<Users> {
     return await this.usersRepository.getUserByEmail(email);
@@ -69,5 +69,23 @@ export class UsersService {
    */
   async removeRefreshToken(userId: number) {
     return await this.usersRepository.update(userId, { jwtToken: null });
+  }
+
+  /**
+   * 회원 탈퇴
+   * 30일 이상이면 Delete 30일 이하면 기한을 두고 softDelete
+   * @param userId
+   */
+  async deleteUser(userId: number): Promise<void> {
+    const user = await this.getUserById(userId);
+
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    if (user.deletedAt >= thirtyDaysAgo) {
+      await this.usersRepository.delete(userId);
+    } else {
+      await this.usersRepository.softDelete(userId);
+    }
   }
 }
