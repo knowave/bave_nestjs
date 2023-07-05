@@ -55,7 +55,7 @@ export class AuthService {
    * @param userId
    * @returns
    */
-  createRefreshToken(userId: string) {
+  createRefreshToken(userId: number) {
     const payload = { userId };
     return this.jwtService.sign(payload, {
       secret: this.configService.get('JWT_REFRESH_TOKEN_SECRET'),
