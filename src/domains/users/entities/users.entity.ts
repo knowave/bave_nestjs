@@ -64,7 +64,7 @@ export class Users extends BaseEntity {
   @JoinColumn({ name: 'reply_id', referencedColumnName: 'replyId' })
   replyList: Reply[];
 
-  @OneToMany(() => Feeds, (feed) => feed.userId)
+  @OneToMany(() => Feeds, (feed) => feed.user, { eager: false })
   feedList: Feeds[];
 
   /**

@@ -53,8 +53,7 @@ export class Beaches extends BaseEntity {
   })
   longitude: string;
 
-  @OneToMany(() => Feeds, (feed) => feed.beachId)
-  @JoinColumn({ name: 'feed_id', referencedColumnName: 'feedId' })
+  @OneToMany(() => Feeds, (feed) => feed.beach, { eager: false })
   feedList?: Feeds[];
 
   @OneToMany(() => Bookmarks, (bookmark) => bookmark.beachId)

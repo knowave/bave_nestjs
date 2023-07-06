@@ -35,13 +35,11 @@ export class Feeds extends BaseEntity {
   })
   image!: string[] | null;
 
-  @ManyToOne(() => Users, (user) => user.feedList)
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'userId' })
-  userId: number;
+  @ManyToOne(() => Users, (user) => user.feedList, { eager: false })
+  user: Users;
 
-  @ManyToOne(() => Beaches, (beach) => beach.feedList)
-  @JoinColumn({ name: 'beach_id', referencedColumnName: 'beachId' })
-  beachId: number;
+  @ManyToOne(() => Beaches, (beach) => beach.feedList, { eager: false })
+  beach: Beaches;
 
   @OneToMany(() => Reply, (reply) => reply.feedId)
   @JoinColumn({ name: 'reply_id', referencedColumnName: 'replyId' })
