@@ -48,6 +48,9 @@ export class Users extends BaseEntity {
   })
   jwtToken!: string | null;
 
+  @OneToMany(() => Feeds, (feed) => feed.user, { eager: false })
+  feeds: Feeds[];
+  
   @OneToMany(() => Bookmarks, (bookmark) => bookmark.userId)
   @JoinColumn({ name: 'bookmark_id', referencedColumnName: 'bookmarkId' })
   bookmarkList: Bookmarks[];
@@ -60,8 +63,6 @@ export class Users extends BaseEntity {
   @JoinColumn({ name: 'reply_id', referencedColumnName: 'replyId' })
   replyList: Reply[];
 
-  @OneToMany(() => Feeds, (feed) => feed.user, { eager: false })
-  feedList: Feeds[];
 
   /**
    * 비밀번호 암호화

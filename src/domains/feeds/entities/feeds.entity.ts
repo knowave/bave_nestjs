@@ -35,18 +35,17 @@ export class Feeds extends BaseEntity {
   })
   image!: string[] | null;
 
-  @ManyToOne(() => Users, (user) => user.feedList, { eager: false })
+  @ManyToOne(() => Users, (user) => user.feeds, { eager: false })
   user: Users;
 
-  @ManyToOne(() => Beaches, (beach) => beach.feedList, { eager: false })
+  @ManyToOne(() => Beaches, (beach) => beach.feeds, { eager: false })
   beach: Beaches;
 
   @OneToMany(() => Reply, (reply) => reply.feedId)
   @JoinColumn({ name: 'reply_id', referencedColumnName: 'replyId' })
   replyList: Reply[];
 
-  @OneToMany(() => Bookmarks, (bookmark) => bookmark.feedId)
-  @JoinColumn({ name: 'bookmark_id', referencedColumnName: 'bookmarkId' })
+  @OneToMany(() => Bookmarks, (bookmark) => bookmark.feedId, {})
   bookmarkList: Bookmarks[];
 
   @OneToMany(() => Likes, (like) => like.feedId)
