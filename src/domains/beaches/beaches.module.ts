@@ -9,5 +9,6 @@ import { BeachesRepository } from './beaches.repository';
   imports: [TypeOrmModule.forFeature([Beaches])],
   providers: [BeachesService, BeachesRepository],
   controllers: [BeachesController],
+  exports: [BeachesService, BeachesRepository],
 })
 export class BeachesModule {}
