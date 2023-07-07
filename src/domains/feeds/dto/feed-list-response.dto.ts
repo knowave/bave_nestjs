@@ -8,7 +8,7 @@ export class FeedListResponseDto extends OmitType(Feeds, [
   'deletedAt',
 ]) {
   email: string;
-  userName: string;
+  username: string;
   beachName: string;
 
   constructor(partial?: Partial<Feeds>) {
