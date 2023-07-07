@@ -39,3 +39,10 @@ export const AUTH_EXCEPTION = {
     message: '아이디/비밀번호가 일치하지 않습니다',
   },
 };
+
+export const FEED_EXCEPTION = {
+  FEED_NOT_FOUND: {
+    code: 'FEED_NOT_FOUND',
+    message: '존재하는 피드가 없습니다.',
+  },
+};
