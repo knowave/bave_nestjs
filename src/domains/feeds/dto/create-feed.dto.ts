@@ -5,4 +5,8 @@ export class CreateFeedDto {
   content: string;
 
   image!: string[] | null;
+
+  userId: number;
+
+  beachId: number;
 }
