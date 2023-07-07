@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { Users } from '../users/entities/users.entity';
-import { CurrentUser } from 'src/dacorators/current-user.dacorator';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { UpdateUserDto } from '../users/dto/update-user.dto';
 
