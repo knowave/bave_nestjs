@@ -106,7 +106,7 @@ describe('BeachesService', () => {
         beachName: '경포 해수욕장',
         latitude: '3.3',
         longitude: '2.2',
-        feedList: [],
+        feeds: [],
         bookmarkList: [],
         likeId: 0,
       };
