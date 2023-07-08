@@ -11,8 +11,8 @@ import { BeachesService } from '../beaches/beaches.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Feeds]), UsersModule, BeachesModule],
-  providers: [FeedsService, UsersService, BeachesService],
+  providers: [FeedsService, FeedsRepository, UsersService, BeachesService],
   controllers: [FeedsController],
-  exports: [FeedsService, FeedsRepository],
+  exports: [FeedsService],
 })
 export class FeedsModule {}
