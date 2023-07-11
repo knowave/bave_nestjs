@@ -44,13 +44,14 @@ export class Users extends BaseEntity {
   @Column('longtext', {
     name: 'jwt_token',
     comment: 'jwt refresh token',
+    nullable: true,
     select: false,
   })
-  jwtToken!: string | null;
+  jwtToken?: string | null;
 
   @OneToMany(() => Feeds, (feed) => feed.user, { eager: false })
   feeds: Feeds[];
-  
+
   @OneToMany(() => Bookmarks, (bookmark) => bookmark.userId)
   @JoinColumn({ name: 'bookmark_id', referencedColumnName: 'bookmarkId' })
   bookmarkList: Bookmarks[];
@@ -62,7 +63,6 @@ export class Users extends BaseEntity {
   @OneToMany(() => Reply, (reply) => reply.userId)
   @JoinColumn({ name: 'reply_id', referencedColumnName: 'replyId' })
   replyList: Reply[];
-
 
   /**
    * 비밀번호 암호화
