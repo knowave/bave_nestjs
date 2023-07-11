@@ -7,8 +7,6 @@ import * as Joi from '@hapi/joi';
 import { BeachesModule } from './domains/beaches/beaches.module';
 import { AuthModule } from './domains/auth/auth.module';
 import { UsersModule } from './domains/users/users.module';
-import { APP_GUARD } from '@nestjs/core';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { FeedsModule } from './domains/feeds/feeds.module';
 
 @Module({
@@ -29,6 +27,6 @@ import { FeedsModule } from './domains/feeds/feeds.module';
     DatabasesModule,
   ],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard }],
+  providers: [AppService],
 })
 export class AppModule {}
