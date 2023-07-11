@@ -7,6 +7,7 @@ import { DataSource, Repository } from 'typeorm';
 import { Users } from './entities/users.entity';
 import { USER_EXCEPTION } from '../../exception/error-code';
 import { CreateUserDto } from './dto/create-user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersRepository extends Repository<Users> {
@@ -53,7 +54,7 @@ export class UsersRepository extends Repository<Users> {
       throw new BadRequestException(USER_EXCEPTION.NOT_MATCH_PASSWORD);
     }
 
-    await user.hashPassword(password);
+    await bcrypt.hash(password, 12);
     return await this.save(create);
   }
 
