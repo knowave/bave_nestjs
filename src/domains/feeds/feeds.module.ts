@@ -13,6 +13,6 @@ import { BeachesService } from '../beaches/beaches.service';
   imports: [TypeOrmModule.forFeature([Feeds]), UsersModule, BeachesModule],
   providers: [FeedsService, FeedsRepository, UsersService, BeachesService],
   controllers: [FeedsController],
-  exports: [FeedsService],
+  exports: [FeedsService, FeedsRepository],
 })
 export class FeedsModule {}
