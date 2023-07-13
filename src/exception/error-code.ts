@@ -46,3 +46,10 @@ export const FEED_EXCEPTION = {
     message: '존재하는 피드가 없습니다.',
   },
 };
+
+export const LIKE_EXCEPTION = {
+  LIKE_FAIL: {
+    code: 'LIKE_FAIL',
+    message: '좋아요 기능이 실패하였습니다.',
+  },
+};
